@@ -136,29 +136,3 @@ function sortStack(stack) {
 		stack.push(reverse.pop());
 	}
 }
-
-function checkOrder(stack) {
-
-	let check = true;
-
-	let temp = new Stack();
-	temp.push(stack.pop());
-	let val = temp.peek();
-	while(stack !== null) {
-		if(val >= stack.peek()) {
-			check = false;
-		}
-		temp.push(stack.pop());
-		val = temp.peek();
-	}
-	while(temp !== null) {
-		stack.push(temp.pop());
-	}
-	return check;
-}
-
-// stack: 		3, 5, 8, 10, 53
-// val: 		10
-// temp: 		10, 8, 5, 3
-
-// iter: 	top: 
