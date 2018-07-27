@@ -31,6 +31,9 @@ class Stack {
 		return str;
 	}
 
+	isEmpty() {
+		return this.top === null;
+	}
 }
 
 class _Node {
@@ -118,23 +121,20 @@ function matchParens(exp) {
 }
 
 function sortStack(stack) {
-	let temp = new Stack();
-	let isOrdered = false;
-	let val;
+	let temp;
+	let reverse = new Stack();
 
-	while(!isOrdered) {
-		val = stack.pop();
-		while(stack !== null && val > stack.peek()) {
-			temp.push(stack.pop());
+	while(!stack.isEmpty()) {
+		temp = stack.pop();
+		// console.log(reverse);
+		while(!reverse.isEmpty() && reverse.peek() > temp) {
+			stack.push(reverse.pop());
 		}
-		temp.push(val);
-		while(temp !== null) {
-			stack.push(temp.pop());
-		}
-		isOrdered = checkOrder(stack);
+		reverse.push(temp);
 	}
-
-	return stack;
+	while(!reverse.isEmpty()) {
+		stack.push(reverse.pop());
+	}
 }
 
 function checkOrder(stack) {
