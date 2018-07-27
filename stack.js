@@ -9,9 +9,26 @@ class Stack {
 	}
 
 	pop() {
+		if(this.top === null) {
+			return null;
+		}
 		let temp = this.top;
 		this.top = this.top.next;
 		return temp;
+	}
+
+	peek() {
+		return this.top.data;
+	}
+
+	display() {
+		let iter = this.top.next;
+		let str = this.top.data;
+		while(iter !== null) {
+			str += "\n" + iter.data;
+			iter = iter.next;
+		}
+		return str;
 	}
 }
 
@@ -27,7 +44,7 @@ function main() {
 	stack.push(5);
 	stack.push(3);
 
-	console.log(stack.pop());
+	console.log(stack.display());
 }
 
 main();
