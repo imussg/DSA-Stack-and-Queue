@@ -46,5 +46,33 @@ class Queue {
 
 }
 
+const peek = queue => {
+  return queue.first.value;
+};
+
+const display = queue => {
+  while (queue.first !== null) {
+    return queue.dequeue();
+  }
+};
+
+const main = () =>  {
+
+  let starTrek = new Queue();
+  starTrek.enqueue('Kirk');
+  starTrek.enqueue('Spock');
+  starTrek.enqueue('Uhura');
+  starTrek.enqueue('Sulu');
+  starTrek.enqueue('Chekov');
+
+console.log(display(starTrek));
+console.log(peek(starTrek));
+
+};
+
+main();
+
+
+
 
 
