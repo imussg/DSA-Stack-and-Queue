@@ -14,7 +14,7 @@ class Stack {
 		}
 		let temp = this.top;
 		this.top = this.top.next;
-		return temp;
+		return temp.data;
 	}
 
 	peek() {
@@ -30,6 +30,7 @@ class Stack {
 		}
 		return str;
 	}
+
 }
 
 class _Node {
@@ -47,7 +48,7 @@ function main() {
 	starTrek.push('Scotty');
 
 	console.log(starTrek.display());
-	starTrek.pop();
+	console.log(starTrek.pop());
 	starTrek.pop();
 	starTrek.push('Scotty');
 	console.log('+++++ New starTrek Stack ++++++++++++++++++++');
@@ -59,6 +60,13 @@ function main() {
 	console.log(is_palindrome("Tauhida"));
 
 	console.log(matchParens("(((())"));
+	
+	let stack = new Stack();
+	stack.push(15);
+	stack.push(100);
+	stack.push(30);
+	sortStack(stack);
+	console.log(stack.display());
 }
 
 main();
@@ -108,3 +116,49 @@ function matchParens(exp) {
 
 	return "All parentheses are account for.";
 }
+
+function sortStack(stack) {
+	let temp = new Stack();
+	let isOrdered = false;
+	let val;
+
+	while(!isOrdered) {
+		val = stack.pop();
+		while(stack !== null && val > stack.peek()) {
+			temp.push(stack.pop());
+		}
+		temp.push(val);
+		while(temp !== null) {
+			stack.push(temp.pop());
+		}
+		isOrdered = checkOrder(stack);
+	}
+
+	return stack;
+}
+
+function checkOrder(stack) {
+
+	let check = true;
+
+	let temp = new Stack();
+	temp.push(stack.pop());
+	let val = temp.peek();
+	while(stack !== null) {
+		if(val >= stack.peek()) {
+			check = false;
+		}
+		temp.push(stack.pop());
+		val = temp.peek();
+	}
+	while(temp !== null) {
+		stack.push(temp.pop());
+	}
+	return check;
+}
+
+// stack: 		3, 5, 8, 10, 53
+// val: 		10
+// temp: 		10, 8, 5, 3
+
+// iter: 	top: 
