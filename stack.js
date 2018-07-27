@@ -25,7 +25,7 @@ class Stack {
 		let iter = this.top.next;
 		let str = this.top.data;
 		while(iter !== null) {
-			str += "\n" + iter.data;
+			str += "  " + iter.data;
 			iter = iter.next;
 		}
 		return str;
@@ -57,6 +57,8 @@ function main() {
 	console.log(is_palindrome("A man, a plan, a canal: Panama"));
 	console.log(is_palindrome("1001"));
 	console.log(is_palindrome("Tauhida"));
+
+	console.log(matchParens("(((())"));
 }
 
 main();
@@ -81,4 +83,28 @@ function is_palindrome(s) {
     } else {
     	return false;
     }
+}
+
+function matchParens(exp) {
+	let count = 0;
+	let iter = 0;
+	let pos = new Stack();
+	while(iter < exp.length) {
+		if(exp[iter] === ")") {
+			pos.pop();
+			count--;
+		} else if(exp[iter] === "(") {
+			pos.push(iter);
+			count++;
+		}
+		if(count < 0) {
+			return `Error: closed parenthesis without an accompanying open parenthesis at position: ${iter}`;
+		}
+		iter++;
+	}
+	if(count !== 0) {
+		return `${exp}\nError: All of the parenthesis have not been closed (positions: ${pos.display()})`;
+	}
+
+	return "All parentheses are account for.";
 }
