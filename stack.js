@@ -40,11 +40,45 @@ class _Node {
 }
 
 function main() {
-	let stack = new Stack();
-	stack.push(5);
-	stack.push(3);
+	let starTrek = new Stack();
+	starTrek.push('Kirk');
+	starTrek.push('Spock');
+	starTrek.push('McCoy');
+	starTrek.push('Scotty');
 
-	console.log(stack.display());
+	console.log(starTrek.display());
+	starTrek.pop();
+	starTrek.pop();
+	starTrek.push('Scotty');
+	console.log('+++++ New starTrek Stack ++++++++++++++++++++');
+	console.log(starTrek.display());
+
+	console.log(is_palindrome("dad"));
+	console.log(is_palindrome("A man, a plan, a canal: Panama"));
+	console.log(is_palindrome("1001"));
+	console.log(is_palindrome("Tauhida"));
 }
 
 main();
+
+function is_palindrome(s) {
+    s = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+    let stack = new Stack();
+    let str1 = "", str2 = "";
+    let iter = 0;
+    while(iter < s.length) {
+    	str1 += s[iter];
+    	stack.push(s[iter]);
+    	iter++;
+    }
+    iter = 0;
+    while(iter < s.length) {
+    	str2 += stack.pop().data;
+    	iter++;
+    }
+    if(str1 === str2) {
+    	return true;
+    } else {
+    	return false;
+    }
+}
